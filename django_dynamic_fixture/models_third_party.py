@@ -2,7 +2,7 @@ from django.db import models
 
 
 try:
-    from django.contrib.postgres.fields import JSONField
+    from django.db.models import JSONField
     class ModelForPostgresFields(models.Model):
         nullable_json_field = JSONField(null=True)
         json_field = JSONField(null=False)

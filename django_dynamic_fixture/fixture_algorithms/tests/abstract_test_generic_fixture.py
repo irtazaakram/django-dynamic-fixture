@@ -38,7 +38,7 @@ class DataFixtureTestCase(object):
 
     def test_boolean(self):
         assert isinstance(self.fixture.generate_data(models.BooleanField()), bool)
-        value = self.fixture.generate_data(models.NullBooleanField())
+        value = self.fixture.generate_data(models.BooleanField(null=True))
         assert isinstance(value, bool) or value == None
 
     def test_date_time_related(self):

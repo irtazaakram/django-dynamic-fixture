@@ -1,8 +1,8 @@
 import json
 
 from django.conf import settings
+from django.db.models import JSONField as DjangoJSONField
 from django.contrib.postgres.fields import (
-    JSONField as DjangoJSONField,
     ArrayField as DjangoArrayField,
 )
 from django.db.models import Field

@@ -48,7 +48,7 @@ class ModelWithBooleans(models.Model):
     # https://docs.djangoproject.com/en/1.6/ref/models/fields/#booleanfield
     # Django 1.6 changed the default value of BooleanField from False to None
     boolean = models.BooleanField(default=False)
-    nullboolean = models.NullBooleanField()
+    nullboolean = models.BooleanField(null=True)
 
     class Meta:
         verbose_name = 'Booleans'
