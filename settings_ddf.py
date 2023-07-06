@@ -5,6 +5,7 @@ DJANGO_VERSION = django.get_version()[0:3]
 DEBUG = True
 
 IMPORT_DDF_MODELS = True
+USE_TZ = False
 
 SECRET_KEY = 'ddf-secret-key'
 
