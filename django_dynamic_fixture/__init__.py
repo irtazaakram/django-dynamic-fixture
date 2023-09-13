@@ -1,11 +1,9 @@
-# -*- coding: utf-8 -*-
 
 """
 This is the facade of all features of DDF.
 Module that contains wrappers and shortcuts (aliases).
 """
 import warnings
-import six
 
 from django.apps import apps
 
@@ -20,11 +18,11 @@ from django_dynamic_fixture.global_settings import DDF_DEFAULT_DATA_FIXTURE, DDF
 from django_dynamic_fixture.script_ddf_checkings import ddf_check_models
 
 
-__version__ = '3.1.2'
+__version__ = '4.0.0'
 
 
-if not django_greater_than(1, 10):
-    warnings.warn("DDF officially supports only Django 1.11 or higher.", DeprecationWarning)
+if not django_greater_than(4, 0):
+    warnings.warn("DDF 4.* officially supports only Django 4 or higher.", DeprecationWarning)
 
 
 LOOKUP_SEP = '__'
@@ -189,18 +187,14 @@ DDFLibrary = DDFLibrary
 PRE_SAVE = set_pre_save_receiver
 POST_SAVE = set_post_save_receiver
 
-if six.PY3:
-    # Add type hints for Python >= 3.5
-    try:
-        import typing
+import typing
 
-        INSTANCE_TYPE = typing.TypeVar('INSTANCE')
+INSTANCE_TYPE = typing.TypeVar('INSTANCE')
 
-        hack_to_avoid_py2_syntax_errors = '''
-def new(model: typing.Type[INSTANCE_TYPE], n=1, ddf_lesson=None, persist_dependencies=True, **kwargs) -> INSTANCE_TYPE:
+def new(model: typing.Type[INSTANCE_TYPE], n: int = 1, ddf_lesson = None, persist_dependencies: bool = True, **kwargs) -> INSTANCE_TYPE:
     return _new(model, n=n, ddf_lesson=ddf_lesson, persist_dependencies=persist_dependencies, **kwargs)
 
-def get(model: typing.Type[INSTANCE_TYPE], n=1, ddf_lesson=None, **kwargs) -> INSTANCE_TYPE:
+def get(model: typing.Type[INSTANCE_TYPE], n: int=1, ddf_lesson=None, **kwargs) -> INSTANCE_TYPE:
     return _get(model, n=n, ddf_lesson=ddf_lesson, **kwargs)
 
 def teach(model: typing.Type[INSTANCE_TYPE], ddf_lesson=None, **kwargs):
@@ -209,7 +203,3 @@ def teach(model: typing.Type[INSTANCE_TYPE], ddf_lesson=None, **kwargs):
 N = new
 G = get
 T = teach
-        '''
-        exec(hack_to_avoid_py2_syntax_errors)
-    except (ImportError, SyntaxError) as e:
-        pass
