@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-# -*- coding: utf-8 -*-
 
 # https://docs.djangoproject.com/en/3.0/ref/models/fields
 import django
@@ -250,7 +249,7 @@ class CustomDjangoField2(models.IntegerField):
     pass
 
 
-class CustomDjangoFieldMixin(object):
+class CustomDjangoFieldMixin:
     pass
 
 
@@ -353,11 +352,11 @@ class ModelForLibrary(models.Model):
         app_label = 'django_dynamic_fixture'
 
 
-class ModelForDDFSetup(models.Model):
-    integer = models.IntegerField(null=True)
+class ModelWithUniqueCharField(models.Model):
+    text_unique = models.CharField(max_length=20, unique=True)
 
     class Meta:
-        verbose_name = 'DDF setup'
+        verbose_name = 'Unique char field'
         app_label = 'django_dynamic_fixture'
 
 
